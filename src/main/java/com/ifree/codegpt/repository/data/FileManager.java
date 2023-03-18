@@ -1,4 +1,4 @@
-package com.trickbd.codegpt.repository.data;
+package com.ifree.codegpt.repository.data;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;

@@ -1,9 +1,9 @@
-package com.trickbd.codegpt.generator;
+package com.ifree.codegpt.generator;
 
-import com.trickbd.codegpt.helper.Notifier;
-import com.trickbd.codegpt.helper.TestParser;
-import com.trickbd.codegpt.repository.api.OpenAIChatApi;
-import com.trickbd.codegpt.repository.data.FileManager;
+import com.ifree.codegpt.helper.Notifier;
+import com.ifree.codegpt.helper.TestParser;
+import com.ifree.codegpt.repository.api.OpenAIChatApi;
+import com.ifree.codegpt.repository.data.FileManager;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;

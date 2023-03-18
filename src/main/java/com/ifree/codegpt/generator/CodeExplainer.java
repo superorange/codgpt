@@ -1,46 +1,62 @@
-package com.trickbd.codegpt.generator;
+package com.ifree.codegpt.generator;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
-import com.trickbd.codegpt.helper.Notifier;
-import com.trickbd.codegpt.helper.TestParser;
-import com.trickbd.codegpt.repository.api.OpenAIChatApi;
-import com.trickbd.codegpt.repository.data.FileManager;
+import com.intellij.ui.components.JBScrollPane;
+import com.ifree.codegpt.repository.api.OpenAIChatApi;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * @author tian
+ */
 public class CodeExplainer {
+
+
+    @SuppressWarnings("AlibabaEnumConstantsMustHaveComment")
+    public enum ExplainerType {
+        CODE_EXPLAIN,
+        CODE_COMMENT
+    }
+
     String apiKey;
     String contents;
 
-
+    String language;
     AnActionEvent e;
 
-    public CodeExplainer(String apiKey, String contents, AnActionEvent e) {
+    public CodeExplainer(String apiKey, String contents, AnActionEvent e, String language) {
         this.apiKey = apiKey;
         this.contents = contents;
         this.e = e;
+        this.language = language;
     }
 
-    public void explain() {
+    public void explain(ExplainerType type) {
 
         OpenAIChatApi api = new OpenAIChatApi(apiKey);
 
         String model = "gpt-3.5-turbo";
-        OpenAIChatApi.ChatMessageRequest[] messages = {
-                new OpenAIChatApi.ChatMessageRequest("user", "Explain this Code\n" + contents)
-        };
-
+        OpenAIChatApi.ChatMessageRequest[] messages = new OpenAIChatApi.ChatMessageRequest[0];
+        if (type == ExplainerType.CODE_EXPLAIN) {
+            messages = new OpenAIChatApi.ChatMessageRequest[]{
+                    new OpenAIChatApi.ChatMessageRequest("user",
+                            "解释这段" + language + "代码作用\n" + contents)
+            };
+        } else if (type == ExplainerType.CODE_COMMENT) {
+            messages = new OpenAIChatApi.ChatMessageRequest[]{
+                    new OpenAIChatApi.ChatMessageRequest("user",
+                            "为这段" + language + "代码生成生成相应的注释,并且保留原代码格式返回\n" + contents)
+            };
+        }
         CompletableFuture<OpenAIChatApi.ChatCompletionResponse> futureResponse = api.sendChatCompletionRequestAsync(model, messages);
 
         futureResponse.thenAccept(response -> {
@@ -79,9 +95,11 @@ public class CodeExplainer {
         textArea.setWrapStyleWord(true);
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(textArea, BorderLayout.CENTER);
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
-        JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder()); // Remove margin
+        // Add padding
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JScrollPane scrollPane = new JBScrollPane(panel);
+        // Remove margin
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.setPreferredSize(toolWindow.getContentManager().getComponent().getSize());
         Content content = contentFactory.createContent(scrollPane, null, false);
         // Add the Content to the ToolWindow

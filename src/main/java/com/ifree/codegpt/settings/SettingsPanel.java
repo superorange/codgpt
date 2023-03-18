@@ -1,7 +1,7 @@
-package com.trickbd.codegpt.settings;
+package com.ifree.codegpt.settings;
 
-import com.trickbd.codegpt.interfaces.SettingsPanelListener;
-import com.trickbd.codegpt.repository.data.LocalData;
+import com.ifree.codegpt.interfaces.SettingsPanelListener;
+import com.ifree.codegpt.repository.data.LocalData;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogWrapper;
 

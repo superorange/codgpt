@@ -1,4 +1,4 @@
-package com.trickbd.codegpt.helper;
+package com.ifree.codegpt.helper;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

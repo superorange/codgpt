@@ -1,4 +1,4 @@
-package com.trickbd.codegpt.repository.api;
+package com.ifree.codegpt.repository.api;
 
 import com.google.gson.Gson;
 import okhttp3.*;

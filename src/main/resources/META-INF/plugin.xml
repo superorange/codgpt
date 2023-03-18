@@ -1,20 +1,20 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-    <id>com.trickbd.CodeGPT</id>
+    <id>com.ifree.codegpt</id>
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>CodeGPT - ChatGPT For Laravel</name>
+    <name>CodeGPT-使用ChatGPT减少工作</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="plugin@trickbd.com" url="https://www.trickbd.com">Trickbd</vendor>
+    <vendor email="sviptian@gmail.com">Tian</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    CodeGPT For Laravel is a powerful IntelliJ plugin that helps Laravel developers to write code faster and with less effort using ChatGPT API. With this plugin, you can generate test cases for your Laravel code base and explain specific code in human-readable format using OpenAI's Codex API (ChatGPT API). Save time and write better code with CodeGPT - ChatGPT For Laravel.
+    CodeGPT is a plugin that can help you generate code comments and explain code.
   ]]></description>
 
     <!-- Product and plugin compatibility requirements.
@@ -29,20 +29,26 @@
 
     </extensions>
     <actions>
-        <group id="GenerateTestCaseGroup" text="CodeGPT - Generate Test Case">
-            <action id="GenerateTestCaseAction" class="com.trickbd.codegpt.action.GenerateTestCaseAction"
-                    text="CodeGPT - Generate Test Case"
+        <group id="CodeCommonGroup" text="CodeGPT - Generate Test Case">
+            <action id="CommentCodeAction" class="com.ifree.codegpt.action.CommentCodeAction"
+                    text="CodeGPT - 生成代码注释"
                     icon="AllIcons.Nodes.Test"/>
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </group>
-        <group id="ExplainCodeGroup" text="CodeGPT - Explain This Code">
-            <action id="ExplainCodeAction" class="com.trickbd.codegpt.action.ExplainCodeAction"
-                    text="CodeGPT - Explain This Code"
+        <group id="CodeExplainGroup" text="CodeGPT - Explain This Code">
+            <action id="ExplainCodeAction" class="com.ifree.codegpt.action.ExplainCodeAction"
+                    text="CodeGPT - 代码解释"
                     icon="AllIcons.RunConfigurations.TestUnknown"/>
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </group>
+        <!--        <group id="GenerateTestCaseGroup" text="CodeGPT - Generate Test Case">-->
+        <!--            <action id="GenerateTestCaseAction" class="action.com.ifree.codegpt.GenerateTestCaseAction"-->
+        <!--                    text="CodeGPT - 生成测试用例"-->
+        <!--                    icon="AllIcons.Nodes.Test"/>-->
+        <!--            <add-to-group group-id="EditorPopupMenu" anchor="last"/>-->
+        <!--        </group>-->
         <group id="UpdateAPIKeyGroup" text="CodeGPT - Manage API Key">
-            <action id="UpdateAPIKeyAction" class="com.trickbd.codegpt.action.UpdateOrChangeApiKeyAction"
+            <action id="UpdateAPIKeyAction" class="com.ifree.codegpt.action.UpdateOrChangeApiKeyAction"
                     text="CodeGPT - Manage API Key"
                     icon="AllIcons.Nodes.KeymapEditor"/>
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>

@@ -1,17 +1,19 @@
-package com.trickbd.codegpt.action;
+package com.ifree.codegpt.action;
 
-import com.trickbd.codegpt.generator.TestCaseGenerator;
-import com.trickbd.codegpt.repository.data.FileManager;
-import com.trickbd.codegpt.repository.data.LocalData;
-import com.trickbd.codegpt.settings.SettingsPanel;
+import com.ifree.codegpt.generator.TestCaseGenerator;
+import com.ifree.codegpt.repository.data.FileManager;
+import com.ifree.codegpt.repository.data.LocalData;
+import com.ifree.codegpt.settings.SettingsPanel;
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.vfs.VirtualFile;
+import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-
+/**
+ * @author tian
+ */
 public class GenerateTestCaseAction extends AnAction {
 
     @Override
@@ -46,6 +48,11 @@ public class GenerateTestCaseAction extends AnAction {
         // Enable the menu item only if a file is selected
         VirtualFile file = e.getData(CommonDataKeys.VIRTUAL_FILE);
         e.getPresentation().setEnabledAndVisible(file != null && !file.isDirectory());
+    }
+
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return super.getActionUpdateThread();
     }
 }
 
