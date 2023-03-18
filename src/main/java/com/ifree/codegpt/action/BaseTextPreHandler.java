@@ -29,7 +29,7 @@ public abstract class BaseTextPreHandler extends AnAction {
             PsiFile file = e.getData(CommonDataKeys.PSI_FILE);
             if (file != null) {
                 String suffix = file.getName().substring(file.getName().lastIndexOf(".") + 1);
-                String languageTag = "[" + suffix.toUpperCase() + "]";
+                String languageTag = "这是一段" + suffix.toUpperCase() + "语言代码";
                 String selectedText = editor.getSelectionModel().getSelectedText();
                 if (selectedText != null && !selectedText.isEmpty()) {
                     showExplanation(e, selectedText, languageTag);
@@ -44,7 +44,7 @@ public abstract class BaseTextPreHandler extends AnAction {
             return;
         }
         String suffix = file.getName().substring(file.getName().lastIndexOf(".") + 1);
-        String languageTag = "[" + suffix.toUpperCase() + "]";
+        String languageTag = "这是一段" + suffix.toUpperCase() + "语言代码";
         showExplanation(e, contents, languageTag);
     }
 

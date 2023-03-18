@@ -29,15 +29,21 @@
 
     </extensions>
     <actions>
-        <group id="CodeCommonGroup" text="CodeGPT - Generate Test Case">
+        <group id="CodeCommonGroup" text="CodeGPT - 生成代码注释">
             <action id="CommentCodeAction" class="com.ifree.codegpt.action.CommentCodeAction"
                     text="CodeGPT - 生成代码注释"
                     icon="AllIcons.Nodes.Test"/>
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </group>
-        <group id="CodeExplainGroup" text="CodeGPT - Explain This Code">
+        <group id="CodeExplainGroup" text="CodeGPT - 代码解释">
             <action id="ExplainCodeAction" class="com.ifree.codegpt.action.ExplainCodeAction"
                     text="CodeGPT - 代码解释"
+                    icon="AllIcons.RunConfigurations.TestUnknown"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </group>
+        <group id="CodeFixGroup" text="CodeGPT - 代码修复">
+            <action id="FixCodeAction" class="com.ifree.codegpt.action.FixCodeAction"
+                    text="CodeGPT - 代码修复"
                     icon="AllIcons.RunConfigurations.TestUnknown"/>
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </group>

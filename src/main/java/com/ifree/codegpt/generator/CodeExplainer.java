@@ -24,7 +24,8 @@ public class CodeExplainer {
     @SuppressWarnings("AlibabaEnumConstantsMustHaveComment")
     public enum ExplainerType {
         CODE_EXPLAIN,
-        CODE_COMMENT
+        CODE_COMMENT,
+        CODE_FIX,
     }
 
     String apiKey;
@@ -49,14 +50,20 @@ public class CodeExplainer {
         if (type == ExplainerType.CODE_EXPLAIN) {
             messages = new OpenAIChatApi.ChatMessageRequest[]{
                     new OpenAIChatApi.ChatMessageRequest("user",
-                            "解释这段" + language + "代码作用\n" + contents)
+                            language + "解释这段代码作用\n" + contents)
             };
         } else if (type == ExplainerType.CODE_COMMENT) {
             messages = new OpenAIChatApi.ChatMessageRequest[]{
                     new OpenAIChatApi.ChatMessageRequest("user",
-                            "为这段" + language + "代码生成生成相应的注释,并且保留原代码格式返回\n" + contents)
+                            language + "使用该语言注释规范生成相应的中文注释, 并且保留原代码格式返回\n" + contents)
+            };
+        } else if (type == ExplainerType.CODE_FIX) {
+            messages = new OpenAIChatApi.ChatMessageRequest[]{
+                    new OpenAIChatApi.ChatMessageRequest("user",
+                            language + "修复这段有问题的代码,并且保留原代码格式返回\n" + contents)
             };
         }
+
         CompletableFuture<OpenAIChatApi.ChatCompletionResponse> futureResponse = api.sendChatCompletionRequestAsync(model, messages);
 
         futureResponse.thenAccept(response -> {
